@@ -1,3 +1,3 @@
-import Debug from 'debug';
+import debug from 'debug';
 
-export default Debug('app');
+export default debug('app');

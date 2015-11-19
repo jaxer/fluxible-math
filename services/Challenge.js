@@ -12,7 +12,7 @@ class Challenge {
     }
 
     static calculateAnswer(a, b, op) {
-        return eval(`${a}${op}${b}`);
+        return eval(`${a}${op}${b}`); //eslint-disable-line no-eval
     }
 
     static generateNumber() {

@@ -46,7 +46,7 @@ GameStore.storeName = 'GameStore';
 GameStore.handlers = {
     'ROUND': 'handleRound',
     'ANSWER_SUBMITTED': 'handleAnswerSubmitted',
-    'ANSWER_SUBMITTING': 'handleAnswerSubmitting',
+    'ANSWER_SUBMITTING': 'handleAnswerSubmitting'
 };
 
 export default GameStore;

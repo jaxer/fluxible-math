@@ -1,6 +1,7 @@
 /*global document, window */
 
 import 'babel-polyfill';
+import FastClick from 'fastclick';
 import ReactDOM from 'react-dom';
 import React from 'react';
 import debug from './services/debug';
@@ -12,6 +13,10 @@ import IoPlugin from './plugins/io';
 const dehydratedState = window.App; // Sent from the server
 
 window.React = ReactDOM; // For chrome dev tool support
+
+window.addEventListener('load', () => {
+    FastClick.attach(document.body);
+});
 
 app.plug(new IoPlugin());
 

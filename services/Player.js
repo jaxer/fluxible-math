@@ -12,7 +12,7 @@ class Player {
         return {
             name: this.name,
             score: this.score
-        }
+        };
     }
 }
 
