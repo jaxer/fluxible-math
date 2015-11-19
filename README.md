@@ -15,9 +15,3 @@ Used:
 # tests
 
     npm test
-
-# server installation
-
-    git clone ...
-    npm install
-    pm2 start start.js
