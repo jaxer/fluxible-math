@@ -1,18 +1,15 @@
+import Operation from './Operation';
+
 class Challenge {
     constructor() {
         this.a = Challenge.generateNumber();
         this.b = Challenge.generateNumber();
         this.op = Challenge.generateOperation();
 
-        this.correctAnswer = Challenge.calculateAnswer(this.a, this.b, this.op);
-        var randomAnswer = Challenge.calculateAnswer(Challenge.generateNumber(),
-            Challenge.generateNumber(), this.op);
+        this.correctAnswer = this.op.fn(this.a, this.b);
+        var randomAnswer = this.op.fn(Challenge.generateNumber(), Challenge.generateNumber());
 
         this.proposedAnswer = Math.random() < 0.5 ? randomAnswer : this.correctAnswer;
-    }
-
-    static calculateAnswer(a, b, op) {
-        return eval(`${a}${op}${b}`); //eslint-disable-line no-eval
     }
 
     static generateNumber() {
@@ -20,14 +17,19 @@ class Challenge {
     }
 
     static generateOperation() {
-        return ['+', '-', '*', '/'][Math.floor(Math.random() * 4)];
+        return [
+            new Operation('+', (a, b) => a + b),
+            new Operation('-', (a, b) => a - b),
+            new Operation('\u00D7', (a, b) => a * b),
+            new Operation('\u00F7', (a, b) => a / b)
+        ][Math.floor(Math.random() * 4)];
     }
 
     serialize() {
         return {
             a: this.a,
             b: this.b,
-            op: this.op,
+            op: this.op.label,
             answer: this.proposedAnswer
         };
     }
