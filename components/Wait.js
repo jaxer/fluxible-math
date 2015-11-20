@@ -40,15 +40,12 @@ class Wait extends React.Component {
 
         if (iWon) {
             message = 'You are the winner!';
-            track(`correct-answer`);
         } else if (iLost) {
             message = 'Wrong answer :(';
-            track(`wrong-answer`);
         } else if (winnerName) {
             message = `${winnerName} won`;
         } else {
             message = 'Round completed';
-            track(`round-timeout`);
         }
 
         return (
