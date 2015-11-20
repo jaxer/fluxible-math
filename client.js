@@ -9,6 +9,7 @@ import { createElementWithContext } from 'fluxible-addons-react';
 import app from './app';
 import roundAction from './actions/round';
 import IoPlugin from './plugins/io';
+import track from './services/track';
 
 const dehydratedState = window.App; // Sent from the server
 
@@ -33,3 +34,5 @@ app.rehydrate(dehydratedState, (err, context) => {
         mountNode
     );
 });
+
+track('load');
