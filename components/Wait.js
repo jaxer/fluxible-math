@@ -28,11 +28,23 @@ class Wait extends React.Component {
         var iAlreadyAnswered = this.props.game.payload.round.iAlreadyAnswered;
         var roundCompleted = this.props.game.payload.round.completed;
         var iLost = !iWon && iAlreadyAnswered;
+        var winnerName = this.props.game.payload.round.winnerName;
+        var message;
+
+        if (iWon) {
+            message = 'You are the winner!';
+        } else if (iLost) {
+            message = 'Wrong answer :(';
+        } else if (winnerName) {
+            message = `${winnerName} won`;
+        } else {
+            message = 'Round completed';
+        }
 
         return (
             <div>
                 <div className="jumbotron game">
-                    <h1>{iWon ? 'You are the winner!' : iLost ? 'Wrong answer :(' : 'Round completed'}</h1>
+                    <h1>{message}</h1>
 
                     { roundCompleted ?
                         <p>Next round will start in {this.getSecondsLeft()} sec</p> :

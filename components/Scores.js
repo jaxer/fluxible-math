@@ -25,7 +25,7 @@ class Scores extends React.Component {
                     {players.map((p, i) => {
                         return <tr key={i} className={p.me ? 'warning' : ''}>
                             <td>{i + 1}</td>
-                            <td>{p.me ? 'Me' : p.name}</td>
+                            <td>{p.me ? `Me (${p.name})` : p.name}</td>
                             <td>{p.score}</td>
                         </tr>;
                     })}

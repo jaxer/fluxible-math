@@ -19,6 +19,8 @@ class Round {
             res.iAlreadyAnswered = true;
         }
 
+        res.winnerName = this.winner ? this.winner.name : null;
+
         return res;
     }
 
