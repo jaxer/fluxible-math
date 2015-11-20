@@ -19,7 +19,7 @@
             host: "sander.ee",
             ref: "origin/master",
             repo: "git@github.com:jaxer/fluxible-math.git",
-            path: "/home/fluxible-math",
+            path: "/home/alex/fluxible-math",
             "post-deploy": "npm install ; npm run build; pm2 startOrRestart ecosystem.json --env production"
         }
     }
