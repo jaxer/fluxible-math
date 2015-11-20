@@ -1,25 +1,17 @@
 {
-    /**
-     * Application configuration section
-     * http://pm2.keymetrics.io/docs/usage/application-declaration/
-     */
-    apps: [
+    "apps": [
         {
-            name: "math",
-            script: "start.js"
+            "name": "math",
+            "script": "start.js"
         }
     ],
-    /**
-     * Deployment section
-     * http://pm2.keymetrics.io/docs/usage/deployment/
-     */
-    deploy: {
-        production: {
-            user: "deploy",
-            host: "sander.ee",
-            ref: "origin/master",
-            repo: "git@github.com:jaxer/fluxible-math.git",
-            path: "/home/deploy/fluxible-math",
+    "deploy": {
+        "production": {
+            "user": "deploy",
+            "host": "sander.ee",
+            "ref": "origin/master",
+            "repo": "git@github.com:jaxer/fluxible-math.git",
+            "path": "/home/deploy/fluxible-math",
             "post-deploy": "npm install ; npm run build; pm2 startOrRestart ecosystem.json --env production"
         }
     }
