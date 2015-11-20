@@ -3,6 +3,7 @@ import GameStore from '../stores/GameStore';
 import debug from '../services/debug';
 import answerAction from '../actions/answer';
 import Scores from '../components/Scores';
+import track from '../services/track';
 
 class Game extends React.Component {
     static contextTypes = {
@@ -17,6 +18,7 @@ class Game extends React.Component {
         e.preventDefault();
         var roundId = this.props.game.payload.round.id;
         this.context.executeAction(answerAction, {answer: answer, roundId: roundId});
+        track(`button-${answer}`);
     }
 
     static seemsInfiniteNumber(n) {
