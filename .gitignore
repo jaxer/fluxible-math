@@ -3,3 +3,5 @@ node_modules
 build
 .idea
 *.iml
+public/main.js
+public/main.js.map
