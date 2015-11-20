@@ -19,14 +19,14 @@ class Game extends React.Component {
         this.context.executeAction(answerAction, {answer: answer, roundId: roundId});
     }
 
-    seemsInfiniteNumber(n) {
+    static seemsInfiniteNumber(n) {
         return ('' + n).length > 10;
     }
 
     render() {
         var c = this.props.game.payload.challenge;
         var isDisabled = this.props.game.isSubmittingAnswer();
-        var seemsInfinite = this.seemsInfiniteNumber(c.answer);
+        var seemsInfinite = Game.seemsInfiniteNumber(c.answer);
 
         return (
             <div>

@@ -8,11 +8,17 @@ class Wait extends React.Component {
     };
 
     getSecondsLeft() {
+        var secs = 0;
+
         if (this.props.game.nextRoundStartsAt) {
-            return Math.round((this.props.game.nextRoundStartsAt.getTime() - new Date().getTime()) / 1000);
-        } else {
-            return 0;
+            secs = Math.round((this.props.game.nextRoundStartsAt.getTime() - new Date().getTime()) / 1000);
         }
+
+        if (secs < 0) {
+            secs = '?';
+        }
+
+        return secs;
     }
 
     componentDidMount() {
