@@ -27,7 +27,7 @@ server.use('/public', express.static(path.join(__dirname, '/public')));
 server.use(cookieParser());
 server.use((req, res, next) => {
     if (!req.cookies.session) {
-        res.cookie('session', 'x' + Math.random(), {maxAge: 900000, httpOnly: true});
+        res.cookie('session', 'x' + Math.random(), {expires: new Date('2099-01-01'), httpOnly: true});
     }
     next();
 });
