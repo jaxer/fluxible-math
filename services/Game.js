@@ -131,7 +131,6 @@ class Game {
     }
 
     getOrCreatePlayer(playerIdent) {
-        debug(this.playersCache);
         var player = this.playersCache[playerIdent];
         if (!player) {
             debug('creating player for ident', playerIdent);
