@@ -1,6 +1,6 @@
 /*global mixpanel*/
 
-import { canUseDOM } from 'fbjs/lib/ExecutionEnvironment';
+import { canUseDOM } from 'exenv';
 
 // mixpanel script
 
