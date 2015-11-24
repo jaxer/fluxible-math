@@ -10,12 +10,14 @@ class GameStore extends BaseStore {
 
     dehydrate() {
         return {
-            payload: this.payload
+            payload: this.payload,
+            nextRoundStartsAt: this.nextRoundStartsAt
         };
     }
 
     rehydrate(state) {
         this.payload = state.payload;
+        this.nextRoundStartsAt = state.nextRoundStartsAt;
     }
 
     handleRound(payload) {
