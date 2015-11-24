@@ -11,7 +11,7 @@ class Wait extends React.Component {
     getSecondsLeft() {
         var secs = 0;
 
-        if (this.props.game.nextRoundStartsAt) {
+        if (this.props.game.nextRoundStartsAt && this.props.game.nextRoundStartsAt.getTime) {
             secs = Math.round((this.props.game.nextRoundStartsAt.getTime() - new Date().getTime()) / 1000);
         }
 
