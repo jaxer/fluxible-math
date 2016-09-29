@@ -1,0 +1,7 @@
+web:
+  build: .
+  restart: always
+  expose:
+    - "3000"
+  environment:
+    - VIRTUAL_HOST=math.sander.ee
