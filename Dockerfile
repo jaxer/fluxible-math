@@ -1,7 +1,4 @@
-FROM aarch64/ubuntu
-RUN apt-get update && apt-get install -y \
-    nodejs \
-    npm
+FROM frozeneye/aarch64-nodejs
 WORKDIR /usr/src/app/
 ADD package.json package.json
 RUN npm install
