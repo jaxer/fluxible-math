@@ -12,7 +12,7 @@ Used:
 # run
 
     npm install
-    npm build
+    npm run-script build
     npm start
   
 # tests
