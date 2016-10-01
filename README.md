@@ -18,3 +18,7 @@ Used:
 # tests
 
     npm test
+
+# demo
+
+[http://math.sander.ee](http://math.sander.ee)
