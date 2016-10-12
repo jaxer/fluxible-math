@@ -1,7 +1,14 @@
 import Operation from './Operation';
 
-function shuffle(a) {
-    for (let j, x, i = a.length; i; j = parseInt(Math.random() * i), x = a[--i], a[i] = a[j], a[j] = x) {
+function shuffle(array) {
+    let count = array.length,
+        randomNumber,
+        temp;
+    while (count) {
+        randomNumber = Math.random() * count-- | 0;
+        temp = array[count];
+        array[count] = array[randomNumber];
+        array[randomNumber] = temp;
     }
 }
 
@@ -16,7 +23,7 @@ class Challenge {
         let getRandomAnswer = () => this.op.fn(Challenge.generateNumber(), Challenge.generateNumber());
         let getUniqueRandomAnswer = (existingAnswers) => {
             let a = getRandomAnswer();
-            while(existingAnswers.includes(a)) {
+            while (existingAnswers.includes(a)) {
                 a = getRandomAnswer();
             }
             return a;
