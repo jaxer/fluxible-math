@@ -21,27 +21,19 @@ class Game extends React.Component {
         track(`button-${answer}`);
     }
 
-    static seemsInfiniteNumber(n) {
-        return ('' + n).length > 10;
-    }
-
     render() {
         var c = this.props.game.payload.challenge;
         var isDisabled = this.props.game.isSubmittingAnswer();
-        var seemsInfinite = Game.seemsInfiniteNumber(c.answer);
 
         return (
             <div>
                 <div className="jumbotron game">
-                    <h1>{c.a} {c.op} {c.b} {seemsInfinite ? '\u2248' : '='} {
-                        seemsInfinite ? c.answer.toFixed(6) : c.answer} ?</h1>
+                    <h1>{c.a} {c.op} {c.b} = ?</h1>
 
-                    <a href="#" onClick={this.handleButton.bind(this, 'yes')}
+                    {c.answers.map(a =>
+                    <a key={a} href="#" onClick={this.handleButton.bind(this, a)}
                        className="btn btn-success btn-lg"
-                       disabled={isDisabled}>YES</a>
-                    <a href="#" onClick={this.handleButton.bind(this, 'no')}
-                       className="btn btn-danger btn-lg"
-                       disabled={isDisabled}>NO</a>
+                       disabled={isDisabled}>{a}</a>)}
                 </div>
             </div>
         );

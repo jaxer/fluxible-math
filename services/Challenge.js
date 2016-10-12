@@ -1,5 +1,10 @@
 import Operation from './Operation';
 
+function shuffle(a) {
+    for (let j, x, i = a.length; i; j = parseInt(Math.random() * i), x = a[--i], a[i] = a[j], a[j] = x) {
+    }
+}
+
 class Challenge {
     constructor() {
         this.a = Challenge.generateNumber();
@@ -7,9 +12,23 @@ class Challenge {
         this.op = Challenge.generateOperation();
 
         this.correctAnswer = this.op.fn(this.a, this.b);
-        var randomAnswer = this.op.fn(Challenge.generateNumber(), Challenge.generateNumber());
 
-        this.proposedAnswer = Math.random() < 0.5 ? randomAnswer : this.correctAnswer;
+        let getRandomAnswer = () => this.op.fn(Challenge.generateNumber(), Challenge.generateNumber());
+        let getUniqueRandomAnswer = (existingAnswers) => {
+            let a = getRandomAnswer();
+            while(existingAnswers.includes(a)) {
+                a = getRandomAnswer();
+            }
+            return a;
+        };
+
+        this.proposedAnswers = [this.correctAnswer];
+
+        this.proposedAnswers.push(getUniqueRandomAnswer(this.proposedAnswers));
+        this.proposedAnswers.push(getUniqueRandomAnswer(this.proposedAnswers));
+        this.proposedAnswers.push(getUniqueRandomAnswer(this.proposedAnswers));
+
+        shuffle(this.proposedAnswers);
     }
 
     static generateNumber() {
@@ -20,9 +39,8 @@ class Challenge {
         return [
             new Operation('+', (a, b) => a + b),
             new Operation('-', (a, b) => a - b),
-            new Operation('\u00D7', (a, b) => a * b),
-            new Operation('\u00F7', (a, b) => a / b)
-        ][Math.floor(Math.random() * 4)];
+            new Operation('\u00D7', (a, b) => a * b)
+        ][Math.floor(Math.random() * 3)];
     }
 
     serialize() {
@@ -30,13 +48,12 @@ class Challenge {
             a: this.a,
             b: this.b,
             op: this.op.label,
-            answer: this.proposedAnswer
+            answers: [...this.proposedAnswers]
         };
     }
 
     isCorrectAnswer(answer) {
-        var shouldBe = this.correctAnswer === this.proposedAnswer ? 'yes' : 'no';
-        return answer === shouldBe;
+        return answer === this.correctAnswer;
     }
 }
 
