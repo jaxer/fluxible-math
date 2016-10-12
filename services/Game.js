@@ -68,8 +68,7 @@ class Game {
     }
 
     onChangeName(player, newName) {
-        newName = '' + newName;
-        if (newName && newName.length < 20) {
+        if (newName && typeof newName === 'string' && newName.length < 20) {
             player.setName(newName);
             this.emitPayloadToAll();
         }
