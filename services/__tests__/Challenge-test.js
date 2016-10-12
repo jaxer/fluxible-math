@@ -10,10 +10,10 @@ describe('Challenge', () => {
         c.a = 3;
         c.b = 5;
         c.op = new Operation('+', (a, b) => a);
-        c.proposedAnswer = 10;
+        c.proposedAnswers = [10, 30, 1, 8];
         expect(c.serialize()).toEqual({
             a: 3,
-            answer: 10,
+            answers: [10, 30, 1, 8],
             b: 5,
             op: '+'
         });
