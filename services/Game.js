@@ -1,7 +1,7 @@
 import Challenge from './Challenge';
 import Round from './Round';
 import Player from './Player';
-import { roundTime, waitTime } from '../configs/game';
+import {roundTime, waitTime} from '../configs/game';
 import debug from './debug';
 import cookie from 'cookie';
 
@@ -59,7 +59,7 @@ class Game {
             } else {
                 player.score--;
                 this.round.markAnsweredBy(player);
-                if(this.allAnswered()) {
+                if (this.allAnswered()) {
                     this.stopRound();
                 }
             }
@@ -68,8 +68,11 @@ class Game {
     }
 
     onChangeName(player, newName) {
-        player.setName(newName);
-        this.emitPayloadToAll();
+        newName = '' + newName;
+        if (newName && newName.length < 20) {
+            player.setName(newName);
+            this.emitPayloadToAll();
+        }
     }
 
     allAnswered() {
@@ -112,15 +115,13 @@ class Game {
             nextRoundStartsInSecs: this.getSecsTillRoundStart(),
             challenge: this.challenge.serialize(),
             score: player.score,
-            players: Object.keys(this.sockets).map((ident) => this.playersCache[ident]).
-                sort((a, b) => a.score > b.score ? -1 : a.score < b.score ? 1 : 0).
-                map((p) => {
-                    var res = p.serialize();
-                    if (p === player) {
-                        res.me = true;
-                    }
-                    return res;
-                })
+            players: Object.keys(this.sockets).map((ident) => this.playersCache[ident]).sort((a, b) => a.score > b.score ? -1 : a.score < b.score ? 1 : 0).map((p) => {
+                var res = p.serialize();
+                if (p === player) {
+                    res.me = true;
+                }
+                return res;
+            })
         };
     }
 
