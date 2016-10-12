@@ -14,7 +14,6 @@ import { createServer } from 'http';
 import createIo from 'socket.io';
 import Game from './services/Game';
 import roundAction from './actions/round';
-import cookieSession from 'cookie-session';
 import cookieParser from 'cookie-parser';
 
 const env = process.env.NODE_ENV;
@@ -36,7 +35,8 @@ server.use(bodyParser.json());
 
 const httpServer = createServer(server);
 const io = createIo(httpServer);
-var game = new Game(io);
+
+let game = new Game(io);
 
 server.use((req, res, next) => {
     const context = app.createContext();

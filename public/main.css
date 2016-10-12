@@ -81,3 +81,8 @@ body {
 .jumbotron.game a.btn {
     margin: 5px;
 }
+
+table .edit {
+    margin-left: 10mm;
+    color: #999;
+}

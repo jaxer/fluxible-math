@@ -8,6 +8,10 @@ class Player {
         this.socket = socket;
     }
 
+    setName(newName) {
+        this.name = newName;
+    }
+
     serialize() {
         return {
             name: this.name,

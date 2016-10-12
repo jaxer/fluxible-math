@@ -41,7 +41,7 @@ var webpackConfig = {
             }
         })
     ],
-    devtool: 'source-map'
+    devtool: 'inline-source-map'
 };
 
 module.exports = webpackConfig;

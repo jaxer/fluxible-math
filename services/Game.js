@@ -39,6 +39,7 @@ class Game {
 
         socket.on('answer', this.onAnswer.bind(this, player));
         socket.on('disconnect', this.onDisconnect.bind(this, player));
+        socket.on('name', this.onChangeName.bind(this, player));
 
         this.emitPayloadToAll();
     }
@@ -64,6 +65,11 @@ class Game {
             }
         }
         fn(this.getPayload(player));
+    }
+
+    onChangeName(player, newName) {
+        player.setName(newName);
+        this.emitPayloadToAll();
     }
 
     allAnswered() {
