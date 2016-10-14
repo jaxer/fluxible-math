@@ -8,3 +8,4 @@ test_async:
   script:
    - npm install
    - npm test
+   - npm run lint
