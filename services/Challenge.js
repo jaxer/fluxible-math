@@ -1,4 +1,4 @@
-import Operation from './Operation';
+import Operation from "./Operation";
 
 function shuffle(array) {
     let count = array.length,
@@ -60,7 +60,7 @@ class Challenge {
     }
 
     isCorrectAnswer(answer) {
-        return answer === this.correctAnswer;
+        return Number(answer) === Number(this.correctAnswer);
     }
 }
 

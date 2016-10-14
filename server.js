@@ -40,9 +40,15 @@ const io = createIo(httpServer);
 let game = new Game(io);
 
 server.use((req, res, next) => {
+    req.player = game.getOrCreatePlayer(req.cookies.session);
+    next();
+});
+
+server.use((req, res, next) => {
     const context = app.createContext();
 
-    context.executeAction(roundAction, game.getPayloadForPlayerIdent(req.cookies.session));
+    // fill GameStore with latest round payload
+    context.executeAction(roundAction, game.getPayload(req.player));
 
     debug('Executing navigate action');
     context.getActionContext().executeAction(navigateAction, {
@@ -77,6 +83,12 @@ server.use((req, res, next) => {
         res.write(html);
         res.end();
     });
+});
+
+server.get('/answer/:roundId/:answer', (req, res) => {
+    game.onAnswer(req.player, req.params, () => {
+    });
+    res.redirect('/game');
 });
 
 const port = process.env.PORT || 3000;

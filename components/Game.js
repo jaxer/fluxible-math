@@ -16,14 +16,15 @@ class Game extends React.Component {
 
     handleButton(answer, e) {
         e.preventDefault();
-        var roundId = this.props.game.payload.round.id;
+        let roundId = this.props.game.payload.round.id;
         this.context.executeAction(answerAction, {answer: answer, roundId: roundId});
         track(`button-${answer}`);
     }
 
     render() {
-        var c = this.props.game.payload.challenge;
-        var isDisabled = this.props.game.isSubmittingAnswer();
+        let roundId = this.props.game.payload.round.id;
+        let c = this.props.game.payload.challenge;
+        let isDisabled = this.props.game.isSubmittingAnswer();
 
         return (
             <div>
@@ -31,7 +32,7 @@ class Game extends React.Component {
                     <h1>{c.a} {c.op} {c.b} = ?</h1>
 
                     {c.answers.map(a =>
-                    <a key={a} href="#" onClick={this.handleButton.bind(this, a)}
+                    <a key={a} href={`/answer/${roundId}/${a}`} onClick={this.handleButton.bind(this, a)}
                        className="btn btn-success btn-lg"
                        disabled={isDisabled}>{a}</a>)}
                 </div>
