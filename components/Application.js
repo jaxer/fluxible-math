@@ -1,27 +1,24 @@
-/*globals document*/
-
-import React from 'react';
-import ApplicationStore from '../stores/ApplicationStore';
-import { connectToStores, provideContext } from 'fluxible-addons-react';
-import { handleHistory } from 'fluxible-router';
-import pages from '../configs/routes';
-import Header from './Header';
-import Footer from './Footer';
+import React from "react";
+import ApplicationStore from "../stores/ApplicationStore";
+import {connectToStores, provideContext} from "fluxible-addons-react";
+import {handleHistory} from "fluxible-router";
+import Header from "./Header";
+import Footer from "./Footer";
 
 class Application extends React.Component {
     render() {
-        var Handler = this.props.currentRoute.get('handler');
+        let Handler = this.props.currentRoute.handler.default;
 
         return (
             <div>
-                <Header currentRoute={this.props.currentRoute} />
+                <Header currentRoute={this.props.currentRoute}/>
                 <Handler />
                 <Footer />
             </div>
         );
     }
 
-    componentDidUpdate(prevProps, prevState) {
+    componentDidUpdate(prevProps) {
         const newProps = this.props;
         if (newProps.pageTitle === prevProps.pageTitle) {
             return;
@@ -33,8 +30,8 @@ class Application extends React.Component {
 export default provideContext(handleHistory(connectToStores(
     Application,
     [ApplicationStore],
-    function (context, props) {
-        var appStore = context.getStore(ApplicationStore);
+    function (context) {
+        let appStore = context.getStore(ApplicationStore);
         return {
             pageTitle: appStore.getPageTitle()
         };

@@ -31,9 +31,9 @@ class Game {
     }
 
     onConnection(socket) {
-        var playerIdent = cookie.parse(socket.request.headers.cookie).session;
+        let playerIdent = cookie.parse(socket.request.headers.cookie).session;
 
-        var player = this.getOrCreatePlayer(playerIdent);
+        let player = this.getOrCreatePlayer(playerIdent);
         this.playersCache[playerIdent] = player;
         this.sockets[playerIdent] = socket;
 
@@ -115,7 +115,7 @@ class Game {
             challenge: this.challenge.serialize(),
             score: player.score,
             players: Object.keys(this.sockets).map((ident) => this.playersCache[ident]).sort((a, b) => a.score > b.score ? -1 : a.score < b.score ? 1 : 0).map((p) => {
-                var res = p.serialize();
+                let res = p.serialize();
                 if (p === player) {
                     res.me = true;
                 }
@@ -137,7 +137,7 @@ class Game {
     }
 
     getOrCreatePlayer(playerIdent) {
-        var player = this.playersCache[playerIdent];
+        let player = this.playersCache[playerIdent];
         if (!player) {
             debug('creating player for ident', playerIdent);
             player = new Player(playerIdent);

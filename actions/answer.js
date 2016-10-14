@@ -1,6 +1,4 @@
-import debug from '../services/debug';
-
-module.exports = function (context, payload, done) {
+export default function (context, payload, done) {
     context.dispatch('ANSWER_SUBMITTING');
 
     context.io.emit('answer', payload, function (roundPayload) {

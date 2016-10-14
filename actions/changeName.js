@@ -1,5 +1,3 @@
-import debug from '../services/debug';
-
 export default function (context, payload, done) {
     context.dispatch('NAME_CHANGING');
 

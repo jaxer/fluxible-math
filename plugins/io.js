@@ -1,4 +1,3 @@
-import debug from '../services/debug';
 import socket from 'socket.io-client';
 import roundAction from '../actions/round';
 

@@ -1,20 +1,21 @@
-import express from 'express';
-import compression from 'compression';
-import bodyParser from 'body-parser';
-import path from 'path';
-import serialize from 'serialize-javascript';
-import {navigateAction} from 'fluxible-router';
-import debugLib from 'debug';
-import React from 'react';
-import ReactDOM from 'react-dom/server';
-import app from './app';
-import HtmlComponent from './components/Html';
-import { createElementWithContext } from 'fluxible-addons-react';
-import { createServer } from 'http';
-import createIo from 'socket.io';
-import Game from './services/Game';
-import roundAction from './actions/round';
-import cookieParser from 'cookie-parser';
+import "babel-polyfill";
+import express from "express";
+import compression from "compression";
+import bodyParser from "body-parser";
+import path from "path";
+import serialize from "serialize-javascript";
+import {navigateAction} from "fluxible-router";
+import debugLib from "debug";
+import React from "react";
+import ReactDOM from "react-dom/server";
+import app from "./app";
+import HtmlComponent from "./components/Html";
+import {createElementWithContext} from "fluxible-addons-react";
+import {createServer} from "http";
+import createIo from "socket.io";
+import Game from "./services/Game";
+import roundAction from "./actions/round";
+import cookieParser from "cookie-parser";
 
 const env = process.env.NODE_ENV;
 
@@ -72,7 +73,8 @@ server.use((req, res, next) => {
 
         debug('Sending markup');
         res.type('html');
-        res.write('<!DOCTYPE html>' + html);
+        res.write('<!DOCTYPE html>');
+        res.write(html);
         res.end();
     });
 });

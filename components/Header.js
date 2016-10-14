@@ -2,7 +2,7 @@ import React from 'react';
 
 class Header extends React.Component {
     render() {
-        var title = this.props.currentRoute.get('title') || '...';
+        let title = this.props.currentRoute.title || '...';
         return (
             <div className="header clearfix">
                 <h3 className="text-muted">{title}</h3>
