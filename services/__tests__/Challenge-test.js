@@ -1,12 +1,9 @@
-jest.dontMock('../Challenge');
-jest.dontMock('../Operation');
-
-var Challenge = require('../Challenge');
-var Operation = require('../Operation');
+import Challenge from '../Challenge';
+import Operation from '../Operation';
 
 describe('Challenge', () => {
     it('serializes', () => {
-        var c = new Challenge();
+        let c = new Challenge();
         c.a = 3;
         c.b = 5;
         c.op = new Operation('+', (a, b) => a);

@@ -8,8 +8,6 @@ import cookie from 'cookie';
 
 class Game {
     constructor(io) {
-        this.io = io;
-
         /**
          * Active players sockets.
          * Key is Player's ident.
@@ -27,7 +25,7 @@ class Game {
 
         this.rotateRound();
 
-        this.io.on('connection', this.onConnection.bind(this));
+        io.on('connection', this.onConnection.bind(this));
     }
 
     onConnection(socket) {
@@ -142,13 +140,13 @@ class Game {
             debug('creating player for ident', playerIdent);
             player = new Player(playerIdent);
         } else {
-            debug('returnign chached player', playerIdent);
+            debug('returning cached player', playerIdent);
         }
         return player;
     }
 
     getSecsTillRoundStart() {
-        return this.nextRoundAt ? Math.round((this.nextRoundAt.getTime() - new Date().getTime()) / 1000) : 0;
+        return this.nextRoundAt ? Math.round((this.nextRoundAt.getTime() - Date.now()) / 1000) : 0;
     }
 }
 

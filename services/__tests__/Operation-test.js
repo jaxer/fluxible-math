@@ -1,6 +1,4 @@
-jest.dontMock('../Operation');
-
-var Operation = require('../Operation');
+import Operation from '../Operation';
 
 describe('Operation', () => {
     it('stores values', () => {
