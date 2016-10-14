@@ -1,11 +1,11 @@
-import "babel-polyfill";
-import FastClick from "fastclick";
-import ReactDOM from "react-dom";
-import React from "react";
-import {createElementWithContext} from "fluxible-addons-react";
-import app from "./app";
-import IoPlugin from "./plugins/io";
-import track from "./services/track";
+import 'babel-polyfill';
+import FastClick from 'fastclick';
+import ReactDOM from 'react-dom';
+import React from 'react';
+import {createElementWithContext} from 'fluxible-addons-react';
+import app from './app';
+import IoPlugin from './plugins/io';
+import track from './services/track';
 
 const dehydratedState = window.App; // Sent from the server
 

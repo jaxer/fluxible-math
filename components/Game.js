@@ -1,8 +1,5 @@
 import React from 'react';
-import GameStore from '../stores/GameStore';
-import debug from '../services/debug';
 import answerAction from '../actions/answer';
-import Scores from '../components/Scores';
 import track from '../services/track';
 
 class Game extends React.Component {

@@ -122,10 +122,6 @@ class Game {
         };
     }
 
-    getPayloadForPlayerIdent(ident) {
-        return this.getPayload(this.getOrCreatePlayer(ident));
-    }
-
     emitPayload(player) {
         if (player.ident in this.sockets) {
             this.sockets[player.ident].emit('round', this.getPayload(player));

@@ -1,9 +1,9 @@
-import React from "react";
-import ApplicationStore from "../stores/ApplicationStore";
-import {connectToStores, provideContext} from "fluxible-addons-react";
-import {handleHistory} from "fluxible-router";
-import Header from "./Header";
-import Footer from "./Footer";
+import React from 'react';
+import ApplicationStore from '../stores/ApplicationStore';
+import {connectToStores, provideContext} from 'fluxible-addons-react';
+import {handleHistory} from 'fluxible-router';
+import Header from './Header';
+import Footer from './Footer';
 
 class Application extends React.Component {
     render() {
