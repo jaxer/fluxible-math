@@ -6,3 +6,5 @@ web:
     - "3000"
   environment:
     - VIRTUAL_HOST=math.sander.ee
+    - LETSENCRYPT_HOST=math.sander.ee
+    - LETSENCRYPT_EMAIL=alex@sander.ee
