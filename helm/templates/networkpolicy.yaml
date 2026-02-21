@@ -1,0 +1,15 @@
+apiVersion: cilium.io/v2
+kind: CiliumNetworkPolicy
+metadata:
+  name: {{ include "fluxible-math.fullname" . }}
+  labels:
+    {{- include "fluxible-math.labels" . | nindent 4 }}
+spec:
+  endpointSelector:
+    matchLabels:
+      {{- include "fluxible-math.selectorLabels" . | nindent 6 }}
+  ingress:
+    - toPorts:
+        - ports:
+            - port: "{{ .Values.service.port }}"
+              protocol: TCP
