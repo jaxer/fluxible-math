@@ -1,6 +1,6 @@
 image:
   repository: ghcr.io/jaxer/fluxible-math
-  tag: 5344539f5cfd3d428d3b70236595b4676150f2d6
+  tag: fe515234840162a66b7c517cb8dadd064033f7b6
   pullPolicy: IfNotPresent
 
 replicaCount: 1
