@@ -1,4 +1,4 @@
-[![build status](https://gitlab.com/jaxer/fluxible-math/badges/master/build.svg)](https://gitlab.com/jaxer/fluxible-math/commits/master)
+[![CI](https://github.com/jaxer/fluxible-math/actions/workflows/ci.yml/badge.svg)](https://github.com/jaxer/fluxible-math/actions/workflows/ci.yml)
 
 # fluxible-math
 
