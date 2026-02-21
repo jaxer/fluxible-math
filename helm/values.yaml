@@ -1,7 +1,7 @@
 image:
   repository: ghcr.io/jaxer/fluxible-math
-  tag: latest
-  pullPolicy: Always
+  tag: 2cc110d81e4c76f0514433a588c29cdac39db116
+  pullPolicy: IfNotPresent
 
 replicaCount: 1
 

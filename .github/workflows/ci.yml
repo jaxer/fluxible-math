@@ -12,7 +12,7 @@ env:
 
 permissions:
   actions: read
-  contents: read
+  contents: write
   packages: write
 
 jobs:
@@ -45,15 +45,22 @@ jobs:
       - name: Build Docker image
         run: docker build -t ${{ env.IMAGE_NAME }}:${{ github.sha }} .
 
-      - name: Tag and push (master)
+      - name: Push image (master)
         if: github.ref == 'refs/heads/master'
-        run: |
-          docker tag ${{ env.IMAGE_NAME }}:${{ github.sha }} ${{ env.IMAGE_NAME }}:latest
-          docker push ${{ env.IMAGE_NAME }}:${{ github.sha }}
-          docker push ${{ env.IMAGE_NAME }}:latest
+        run: docker push ${{ env.IMAGE_NAME }}:${{ github.sha }}
 
-      - name: Tag and push (PR)
+      - name: Push image (PR)
         if: github.event_name == 'pull_request'
         run: |
           docker tag ${{ env.IMAGE_NAME }}:${{ github.sha }} ${{ env.IMAGE_NAME }}:pr-${{ github.event.pull_request.number }}
           docker push ${{ env.IMAGE_NAME }}:pr-${{ github.event.pull_request.number }}
+
+      - name: Update Helm values with new image tag
+        if: github.ref == 'refs/heads/master'
+        run: |
+          sed -i "s|tag:.*|tag: ${{ github.sha }}|" helm/values.yaml
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add helm/values.yaml
+          git commit -m "chore: update image tag to ${{ github.sha }} [skip ci]"
+          git push
