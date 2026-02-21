@@ -71,7 +71,7 @@ server.use((req, res, next) => {
         debug('Rendering Application component into html');
         const markup = ReactDOM.renderToString(createElementWithContext(context));
         const htmlElement = React.createElement(HtmlComponent, {
-            clientFile: env === 'production' ? 'main.min.js' : 'main.js',
+            clientFile: 'main.js',
             context: context.getComponentContext(),
             state: exposed,
             markup: markup
