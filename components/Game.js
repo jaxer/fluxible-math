@@ -29,9 +29,9 @@ class Game extends React.Component {
                     <h1>{c.a} {c.op} {c.b} = ?</h1>
 
                     {c.answers.map(a =>
-                        <a key={a} href={`/answer/${roundId}/${a}`} onClick={this.handleButton.bind(this, a)}
-                            className="btn btn-success btn-lg"
-                            disabled={isDisabled}>{a}</a>)}
+                    <a key={a} href={`/answer/${roundId}/${a}`} onClick={this.handleButton.bind(this, a)}
+                       className="btn btn-success btn-lg"
+                       disabled={isDisabled}>{a}</a>)}
                 </div>
             </div>
         );

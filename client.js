@@ -1,6 +1,7 @@
-import 'core-js/stable';
-import 'regenerator-runtime/runtime';
+import 'babel-polyfill';
+import FastClick from 'fastclick';
 import ReactDOM from 'react-dom';
+import React from 'react';
 import {createElementWithContext} from 'fluxible-addons-react';
 import app from './app';
 import IoPlugin from './plugins/io';
@@ -9,6 +10,10 @@ import track from './services/track';
 const dehydratedState = window.App; // Sent from the server
 
 window.React = ReactDOM; // For chrome dev tool support
+
+window.addEventListener('load', () => {
+    FastClick.attach(document.body);
+});
 
 app.plug(new IoPlugin());
 

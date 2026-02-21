@@ -1,7 +1,7 @@
-import 'core-js/stable';
-import 'regenerator-runtime/runtime';
+import 'babel-polyfill';
 import express from 'express';
 import compression from 'compression';
+import bodyParser from 'body-parser';
 import path from 'path';
 import serialize from 'serialize-javascript';
 import {navigateAction} from 'fluxible-router';
@@ -12,7 +12,7 @@ import app from './app';
 import HtmlComponent from './components/Html';
 import {createElementWithContext} from 'fluxible-addons-react';
 import {createServer} from 'http';
-import {Server} from 'socket.io';
+import createIo from 'socket.io';
 import Game from './services/Game';
 import roundAction from './actions/round';
 import cookieParser from 'cookie-parser';
@@ -33,10 +33,10 @@ server.use((req, res, next) => {
     next();
 });
 server.use(compression());
-server.use(express.json());
+server.use(bodyParser.json());
 
 const httpServer = createServer(server);
-const io = new Server(httpServer);
+const io = createIo(httpServer);
 
 let game = new Game(io);
 

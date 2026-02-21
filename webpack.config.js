@@ -1,12 +1,9 @@
-const webpack = require('webpack');
-const path = require('path');
+let webpack = require('webpack');
+let path = require('path');
 
-const isProduction = process.env.NODE_ENV === 'production';
-
-module.exports = {
-    mode: isProduction ? 'production' : 'development',
+let webpackConfig = {
     resolve: {
-        extensions: ['.js', '.jsx']
+        extensions: ['', '.js']
     },
     entry: [
         './client.js'
@@ -17,23 +14,34 @@ module.exports = {
         filename: 'main.js'
     },
     module: {
-        rules: [
+        loaders: [
             {
                 test: /\.(js|jsx)$/,
                 exclude: /node_modules/,
-                use: [
+                loaders: [
                     require.resolve('babel-loader')
                 ]
-            }
+            },
+            { test: /\.json$/, loader: 'json-loader'}
         ]
     },
-    node: false,
+    node: {
+        setImmediate: false
+    },
     plugins: [
         new webpack.DefinePlugin({
             'process.env': {
-                NODE_ENV: JSON.stringify(isProduction ? 'production' : 'development')
+                NODE_ENV: JSON.stringify('production')
+            }
+        }),
+        new webpack.optimize.DedupePlugin(),
+        new webpack.optimize.UglifyJsPlugin({
+            compress: {
+                warnings: false
             }
         })
     ],
-    devtool: isProduction ? false : 'source-map'
+    devtool: 'inline-source-map'
 };
+
+module.exports = webpackConfig;
