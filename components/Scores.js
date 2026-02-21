@@ -25,22 +25,22 @@ class Scores extends React.Component {
             <div>
                 <table className="table">
                     <thead>
-                    <tr>
-                        <th>#</th>
-                        <th>Name</th>
-                        <th>Score</th>
-                    </tr>
+                        <tr>
+                            <th>#</th>
+                            <th>Name</th>
+                            <th>Score</th>
+                        </tr>
                     </thead>
                     <tbody>
-                    {players.map((p, i) => {
-                        return <tr key={i} className={p.me ? 'warning' : ''}>
-                            <td>{i + 1}</td>
-                            <td>{p.me ? `Me (${p.name})` : p.name}
-                                {p.me ? <a href="#" onClick={this.handleEdit.bind(this, p)} className="edit">
+                        {players.map((p, i) => {
+                            return <tr key={i} className={p.me ? 'warning' : ''}>
+                                <td>{i + 1}</td>
+                                <td>{p.me ? `Me (${p.name})` : p.name}
+                                    {p.me ? <a href="#" onClick={this.handleEdit.bind(this, p)} className="edit">
                                     change name</a> : null}</td>
-                            <td>{p.score}</td>
-                        </tr>;
-                    })}
+                                <td>{p.score}</td>
+                            </tr>;
+                        })}
                     </tbody>
                 </table>
             </div>
@@ -48,7 +48,7 @@ class Scores extends React.Component {
     }
 }
 
-Scores = connectToStores(Scores, [GameStore], (context, props) => ({
+Scores = connectToStores(Scores, [GameStore], (context, _props) => ({
     game: context.getStore(GameStore)
 }));
 

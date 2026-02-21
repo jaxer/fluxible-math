@@ -1,4 +1,4 @@
-image: node:latest
+image: node:20
 
 cache:
   paths:
@@ -6,6 +6,7 @@ cache:
 
 test_async:
   script:
-   - npm install
+   - npm ci
+   - npm audit --audit-level=high || true
    - npm test
    - npm run lint

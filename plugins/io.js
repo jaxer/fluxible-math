@@ -1,13 +1,13 @@
-import socket from 'socket.io-client';
+import {io} from 'socket.io-client';
 import roundAction from '../actions/round';
 
 class IoPlugin {
     constructor() {
-        this.io = socket();
+        this.io = io();
         this.name = 'IoPlugin';
     }
 
-    plugContext(options, context, app) {
+    plugContext(options, context, _app) {
         this.io.on('round', (payload) => {
             context.executeAction(roundAction, payload);
         });
