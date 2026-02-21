@@ -23,6 +23,7 @@ const debug = debugLib('fluxible-math');
 
 const server = express();
 server.set('trust proxy', 1);
+server.get('/health', (req, res) => res.sendStatus(200));
 server.use('/public', express.static(path.join(__dirname, '/public')));
 server.use(cookieParser());
 server.use((req, res, next) => {

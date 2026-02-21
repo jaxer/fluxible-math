@@ -1,0 +1,41 @@
+image:
+  repository: ghcr.io/jaxer/fluxible-math
+  tag: latest
+  pullPolicy: Always
+
+replicaCount: 1
+
+service:
+  port: 3000
+
+env:
+  NODE_ENV: production
+
+resources:
+  requests:
+    cpu: 100m
+    memory: 128Mi
+  limits:
+    cpu: 500m
+    memory: 256Mi
+
+ingress:
+  enabled: true
+  host: math.sander.ee
+  entryPoints:
+    - websecure
+  tls: true
+
+probes:
+  liveness:
+    path: /health
+    initialDelaySeconds: 10
+    periodSeconds: 10
+  readiness:
+    path: /health
+    initialDelaySeconds: 5
+    periodSeconds: 5
+  startup:
+    path: /health
+    periodSeconds: 5
+    failureThreshold: 30

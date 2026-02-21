@@ -6,20 +6,54 @@ on:
   pull_request:
     branches: [master]
 
+env:
+  REGISTRY: ghcr.io
+  IMAGE_NAME: ghcr.io/jaxer/fluxible-math
+
+permissions:
+  actions: read
+  contents: read
+  packages: write
+
 jobs:
   test:
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        node-version: [20]
-
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
-          node-version: ${{ matrix.node-version }}
+          node-version: 20
           cache: npm
       - run: npm ci
       - run: npm audit --audit-level=high || true
       - run: npm test
       - run: npm run lint
+
+  build-and-publish-docker:
+    runs-on: ubuntu-latest
+    needs: [test]
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Log in to GitHub Container Registry
+        uses: docker/login-action@v3
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build Docker image
+        run: docker build -t ${{ env.IMAGE_NAME }}:${{ github.sha }} .
+
+      - name: Tag and push (master)
+        if: github.ref == 'refs/heads/master'
+        run: |
+          docker tag ${{ env.IMAGE_NAME }}:${{ github.sha }} ${{ env.IMAGE_NAME }}:latest
+          docker push ${{ env.IMAGE_NAME }}:${{ github.sha }}
+          docker push ${{ env.IMAGE_NAME }}:latest
+
+      - name: Tag and push (PR)
+        if: github.event_name == 'pull_request'
+        run: |
+          docker tag ${{ env.IMAGE_NAME }}:${{ github.sha }} ${{ env.IMAGE_NAME }}:pr-${{ github.event.pull_request.number }}
+          docker push ${{ env.IMAGE_NAME }}:pr-${{ github.event.pull_request.number }}

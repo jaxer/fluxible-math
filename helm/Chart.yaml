@@ -1,0 +1,11 @@
+apiVersion: v2
+name: fluxible-math
+description: Multiplayer browser-based math game
+type: application
+version: 1.0.0
+appVersion: '1.0.0'
+maintainers:
+  - name: jaxer
+home: https://github.com/jaxer/fluxible-math
+sources:
+  - https://github.com/jaxer/fluxible-math

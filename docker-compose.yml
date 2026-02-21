@@ -1,10 +1,6 @@
-web:
-  build: .
-  restart: always
-  command: npm start
-  expose:
-    - "3000"
-  environment:
-    - VIRTUAL_HOST=math.sander.ee
-    - LETSENCRYPT_HOST=math.sander.ee
-    - LETSENCRYPT_EMAIL=alex@sander.ee
+services:
+  web:
+    build: .
+    restart: always
+    ports:
+      - "3000:3000"
